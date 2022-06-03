@@ -1,0 +1,28 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "webpack": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kajlos/Battleship.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kajlos/Battleship/issues"
+  },
+  "homepage": "https://github.com/kajlos/Battleship#readme",
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-webpack-plugin": "^3.1.1",
+    "jest": "^28.1.0",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}
