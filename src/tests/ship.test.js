@@ -1,16 +1,16 @@
 let Ship = require('../ship');
 
 describe('Ship', () => {
-  test('creates Ship', () => {
+  it('creates Ship', () => {
     let newShip = new Ship(3);
     expect(newShip).toMatchObject({ hits: 0, length: 3 });
   });
-  test('hits a ship', () => {
+  it('hits a ship', () => {
     let newShip = new Ship(3);
     newShip.hit();
     expect(newShip).toMatchObject({ hits: 1, length: 3 });
   });
-  test('sinks a ship', () => {
+  it('sinks a ship', () => {
     let newShip = new Ship(3);
     newShip.hit();
     newShip.hit();
