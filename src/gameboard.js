@@ -11,8 +11,9 @@ class Gameboard {
     }
   }
   placeShip(ship, coords, orientation) {
-    if (this.#isPlaceAvailable(ship.length, coords, orientation) === false) return;
+    if (!this.#isPlaceAvailable(ship.length, coords, orientation)) return 'Place not avaiable';
     this.#createShip(ship.length, coords, orientation);
+    this.#markSpotsAfertPlace(ship.length, coords, orientation);
   }
   #createShip(length, coords, orientation) {
     if (orientation === 'vertical') {
@@ -26,26 +27,29 @@ class Gameboard {
     }
   }
   #isPlaceAvailable(length, coords, orientation) {
-    // if (orientation !== 'vertical' || orientation !== 'horizontal') return false;
     if (orientation === 'vertical') {
-      return this.board.every(e => {
-        console.log(e);
-        for (let i = 0; i < length; i++) {
-          e[i + coords[0]][coords[1]] === '';
-        }
-      });
-    } else {
-      return this.board.every(e => {
-        for (let i = 0; i < length; i++) {
-          e[coords[0]][i + coords[1]] === '';
-        }
-      });
+      for (let i = 0; i < length; i++) {
+        if (i + coords[0] > 9 || coords[1] > 9) return false;
+        if (this.board[i + coords[0]][coords[1]] !== '') return false;
+      }
+      return true;
+    } else if (orientation === 'horizontal') {
+      for (let i = 0; i < length; i++) {
+        if (coords[0] > 9 || i + coords[1] > 9) return false;
+        if (this.board[coords[0]][i + coords[1]] !== '') return false;
+      }
+      return true;
     }
+    return false;
   }
+  #markSpotsAfertPlace() {}
 }
+
 // let newGameboard = new Gameboard();
 // newGameboard.init();
-// newGameboard.placeShip([0, 1]);
+// let newShip = { hits: 0, length: 2 };
+// newGameboard.placeShip(newShip, [5, 6], 'vertical');
+// newGameboard.placeShip(newShip, [5, 6], 'vertical');
 // console.log(newGameboard.board);
 
 module.exports = Gameboard;

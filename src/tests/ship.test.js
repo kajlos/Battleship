@@ -10,6 +10,10 @@ describe('Ship', () => {
     newShip.hit();
     expect(newShip).toMatchObject({ hits: 1, length: 3 });
   });
+  it('returns length', () => {
+    let newShip = new Ship(3);
+    expect(newShip.getLength()).toEqual(3);
+  });
   it('sinks a ship', () => {
     let newShip = new Ship(3);
     newShip.hit();
