@@ -42,7 +42,7 @@ class Gameboard {
     }
     return false;
   }
-  #markSpotsAfertPlace() {}
+  #markSpotsAfertPlace(length, coords, orientation) {}
 }
 
 // let newGameboard = new Gameboard();
