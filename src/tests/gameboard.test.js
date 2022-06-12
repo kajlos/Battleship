@@ -48,6 +48,7 @@ describe('gameboard', () => {
     let newGameboard = new Gameboard();
     newGameboard.init();
     let newShip = { hits: 0, length: 1 };
+    let newShip2 = { hits: 0, length: 2 };
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     expect(newGameboard.board[5][5]).toEqual('S');
     expect(newGameboard.board[4][5]).toEqual('#');
