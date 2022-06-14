@@ -15,8 +15,8 @@ describe('gameboard', () => {
     let newShip = new Ship(1);
     newGameboard.placeShip(newShip, [0, 1], 'vertical');
     newGameboard.placeShip(newShip, [2, 3], 'vertical');
-    expect(newGameboard.board[0][1]).toEqual('S');
-    expect(newGameboard.board[2][3]).toEqual('S');
+    expect(newGameboard.board[0][1]).toBe(newShip);
+    expect(newGameboard.board[2][3]).toBe(newShip);
   });
   it('places a 2 or more length ship', () => {
     let newGameboard = new Gameboard();
@@ -25,11 +25,11 @@ describe('gameboard', () => {
     let newShip2 = new Ship(3);
     newGameboard.placeShip(newShip, [0, 1], 'vertical');
     newGameboard.placeShip(newShip2, [5, 6], 'horizontal');
-    expect(newGameboard.board[0][1]).toEqual('S');
-    expect(newGameboard.board[1][1]).toEqual('S');
-    expect(newGameboard.board[5][6]).toEqual('S');
-    expect(newGameboard.board[5][7]).toEqual('S');
-    expect(newGameboard.board[5][8]).toEqual('S');
+    expect(newGameboard.board[0][1]).toBe(newShip);
+    expect(newGameboard.board[1][1]).toBe(newShip);
+    expect(newGameboard.board[5][6]).toBe(newShip2);
+    expect(newGameboard.board[5][7]).toBe(newShip2);
+    expect(newGameboard.board[5][8]).toBe(newShip2);
   });
   it("doesn't create ship if ship would be outside gameboard", () => {
     let newGameboard = new Gameboard();
@@ -46,7 +46,7 @@ describe('gameboard', () => {
     newGameboard.init();
     let newShip = new Ship(1);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
-    expect(newGameboard.board[5][5]).toEqual('S');
+    expect(newGameboard.board[5][5]).toBe(newShip);
     expect(newGameboard.board[4][5]).toEqual('#');
     expect(newGameboard.board[4][4]).toEqual('#');
     expect(newGameboard.board[4][6]).toEqual('#');
@@ -61,8 +61,8 @@ describe('gameboard', () => {
     newGameboard.init();
     let newShip = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
-    expect(newGameboard.board[5][5]).toEqual('S');
-    expect(newGameboard.board[6][5]).toEqual('S');
+    expect(newGameboard.board[5][5]).toBe(newShip);
+    expect(newGameboard.board[6][5]).toBe(newShip);
     expect(newGameboard.board[4][4]).toEqual('#');
     expect(newGameboard.board[4][5]).toEqual('#');
     expect(newGameboard.board[4][6]).toEqual('#');
@@ -79,8 +79,8 @@ describe('gameboard', () => {
     newGameboard.init();
     let newShip = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'horizontal');
-    expect(newGameboard.board[5][5]).toEqual('S');
-    expect(newGameboard.board[5][6]).toEqual('S');
+    expect(newGameboard.board[5][5]).toBe(newShip);
+    expect(newGameboard.board[5][6]).toBe(newShip);
     expect(newGameboard.board[5][4]).toEqual('#');
     expect(newGameboard.board[4][4]).toEqual('#');
     expect(newGameboard.board[6][4]).toEqual('#');
@@ -97,9 +97,9 @@ describe('gameboard', () => {
     newGameboard.init();
     let newShip = new Ship(3);
     newGameboard.placeShip(newShip, [7, 0], 'vertical');
-    expect(newGameboard.board[7][0]).toEqual('S');
-    expect(newGameboard.board[8][0]).toEqual('S');
-    expect(newGameboard.board[9][0]).toEqual('S');
+    expect(newGameboard.board[7][0]).toBe(newShip);
+    expect(newGameboard.board[8][0]).toBe(newShip);
+    expect(newGameboard.board[9][0]).toBe(newShip);
     expect(newGameboard.board[6][0]).toEqual('#');
     expect(newGameboard.board[6][1]).toEqual('#');
     expect(newGameboard.board[7][1]).toEqual('#');
@@ -111,13 +111,21 @@ describe('gameboard', () => {
     newGameboard.init();
     let newShip = new Ship(3);
     newGameboard.placeShip(newShip, [9, 7], 'horizontal');
-    expect(newGameboard.board[9][7]).toEqual('S');
-    expect(newGameboard.board[9][8]).toEqual('S');
-    expect(newGameboard.board[9][9]).toEqual('S');
+    expect(newGameboard.board[9][7]).toBe(newShip);
+    expect(newGameboard.board[9][8]).toBe(newShip);
+    expect(newGameboard.board[9][9]).toBe(newShip);
     expect(newGameboard.board[8][6]).toEqual('#');
     expect(newGameboard.board[9][6]).toEqual('#');
     expect(newGameboard.board[8][7]).toEqual('#');
     expect(newGameboard.board[8][8]).toEqual('#');
     expect(newGameboard.board[8][9]).toEqual('#');
+  });
+  it('recieves a attack', () => {
+    let newGameboard = new Gameboard();
+    newGameboard.init();
+    let newShip = new Ship(2);
+    newGameboard.placeShip(newShip, [5, 5], 'vertical');
+    newGameboard.recieveAttack([5, 5]);
+    expect(newShip.hits).toEqual(1);
   });
 });
