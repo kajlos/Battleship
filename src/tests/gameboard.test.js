@@ -127,6 +127,6 @@ describe('gameboard', () => {
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     newGameboard.recieveAttack([5, 5]);
     expect(newGameboard.board[5][5]).not.toBe(newShip);
-    expect(newShip.hits).toEqual(1);
+    expect(newShip.hits).toEqual([[5, 5]]);
   });
 });

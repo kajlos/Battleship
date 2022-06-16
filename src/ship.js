@@ -1,13 +1,13 @@
 class Ship {
   constructor(length) {
     this.length = length;
-    this.hits = 0;
+    this.hits = [];
   }
-  hit() {
-    this.hits += 1;
+  hit(coords) {
+    this.hits.push(coords);
   }
   isSunk() {
-    return this.hits === this.length;
+    return this.hits.length === this.length;
   }
   getLength() {
     return this.length;

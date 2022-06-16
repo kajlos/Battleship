@@ -182,7 +182,7 @@ class Gameboard {
   }
   recieveAttack(coords) {
     let [row, column] = coords;
-    this.board[row][column].hit();
+    this.board[row][column].hit(coords);
     this.#markSpot(coords, 'X');
   }
 }
