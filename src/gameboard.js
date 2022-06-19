@@ -184,7 +184,6 @@ class Gameboard {
     let [row, column] = coords;
     this.board[row][column].hit(coords);
     this.#markSpot(coords, 'X');
-  
   }
 }
 
