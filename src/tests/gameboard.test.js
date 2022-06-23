@@ -129,4 +129,38 @@ describe('gameboard', () => {
     expect(newGameboard.board[5][5]).not.toBe(newShip);
     expect(newShip.hits).toEqual([[5, 5]]);
   });
+  it('recieves a missed attack', () => {
+    let newGameboard = new Gameboard();
+    newGameboard.init();
+    let newShip = new Ship(2);
+    newGameboard.placeShip(newShip, [5, 5], 'vertical');
+    newGameboard.recieveAttack([0, 0]);
+    expect(newGameboard.board[5][5]).toBe(newShip);
+    expect(newShip.hits).toEqual([]);
+    expect(newGameboard.board[0][0]).toBe('.');
+  });
+  it('returns false if not all ships are sunk', () => {
+    let newGameboard = new Gameboard();
+    newGameboard.init();
+    let newShip = new Ship(1);
+    let newShip2 = new Ship(2);
+    newGameboard.placeShip(newShip, [5, 5], 'vertical');
+    newGameboard.placeShip(newShip2, [1, 1], 'horizontal');
+    newGameboard.pushShips();
+    console.log(newGameboard.ships);
+    expect(newGameboard.areAllShipsSunk()).toBe(false);
+  });
+  it('returns true if all ships are sunk', () => {
+    let newGameboard = new Gameboard();
+    newGameboard.init();
+    let newShip = new Ship(1);
+    let newShip2 = new Ship(2);
+    newGameboard.placeShip(newShip, [5, 5], 'vertical');
+    newGameboard.placeShip(newShip2, [1, 1], 'horizontal');
+    newGameboard.pushShips();
+    newGameboard.recieveAttack([5, 5]);
+    newGameboard.recieveAttack([1, 1]);
+    newGameboard.recieveAttack([1, 2]);
+    expect(newGameboard.areAllShipsSunk()).toBe(true);
+  });
 });

@@ -1,6 +1,7 @@
 class Gameboard {
   constructor() {
     this.board = [];
+    this.ships = [];
   }
   init() {
     for (let i = 0; i < 10; i++) {
@@ -182,12 +183,29 @@ class Gameboard {
   }
   recieveAttack(coords) {
     let [row, column] = coords;
-    this.board[row][column].hit(coords);
-    this.#markSpot(coords, 'X');
-    
+    if (typeof this.board[row][column] == 'object') {
+      this.board[row][column].hit(coords);
+      this.#markSpot(coords, 'X');
+      return true;
+    }
+    this.#markSpot(coords, '.');
+    return false;
+  }
+  pushShips() {
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (typeof this.board[i][j] == 'object') {
+          if (!this.ships.includes(this.board[i][j])) {
+            this.ships.push(this.board[i][j]);
+          }
+        }
+      }
+    }
+  }
+  areAllShipsSunk() {
+    return this.ships.every(ship => ship.isSunk());
   }
 }
-
 // let newGameboard = new Gameboard();
 // newGameboard.init();
 // let newShip = new Ship(3);
