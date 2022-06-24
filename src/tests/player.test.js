@@ -1,4 +1,2 @@
-const player = require('../player');
-describe('player', () => {
-  it('df', () => {});
-});
+const Player = require('../player');
+describe('Player', () => {});
