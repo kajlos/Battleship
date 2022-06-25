@@ -1,2 +1,4 @@
 const Player = require('../player');
-describe('Player', () => {});
+describe('Player', () => {
+  let player = new Player();
+});
