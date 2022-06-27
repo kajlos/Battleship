@@ -4,5 +4,6 @@ class Player {
   constructor() {
     this.board = new Gameboard();
   }
+  attack(coords) {}
 }
 module.exports = Player;
