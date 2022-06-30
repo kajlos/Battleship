@@ -7,5 +7,6 @@ class Player {
   attack(targetPlayer, coords) {
     targetPlayer.board.receiveAttack(coords);
   }
+  randomAttack() {}
 }
 module.exports = Player;
