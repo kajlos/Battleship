@@ -7,6 +7,10 @@ class Player {
   attack(targetPlayer, coords) {
     targetPlayer.board.receiveAttack(coords);
   }
-  randomAttack(targetPlayer) {}
+  randomAttack(targetPlayer) {
+    let row = Math.floor(Math.random() * 10);
+    let column = Math.floor(Math.random() * 10);
+    this.attack(targetPlayer, [row, column]);
+  }
 }
 module.exports = Player;
