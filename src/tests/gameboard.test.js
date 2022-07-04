@@ -1,5 +1,5 @@
-let Gameboard = require('../gameboard');
-let Ship = require('../ship');
+import Gameboard from '../gameboard';
+import Ship from '../ship';
 describe('gameboard', () => {
   it('creates a gameboard', () => {
     let newGameboard = new Gameboard();
@@ -125,7 +125,7 @@ describe('gameboard', () => {
     newGameboard.init();
     let newShip = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
-    newGameboard.recieveAttack([5, 5]);
+    newGameboard.receiveAttack([5, 5]);
     expect(newGameboard.board[5][5]).not.toBe(newShip);
     expect(newShip.hits).toEqual([[5, 5]]);
   });
@@ -134,7 +134,7 @@ describe('gameboard', () => {
     newGameboard.init();
     let newShip = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
-    newGameboard.recieveAttack([0, 0]);
+    newGameboard.receiveAttack([0, 0]);
     expect(newGameboard.board[5][5]).toBe(newShip);
     expect(newShip.hits).toEqual([]);
     expect(newGameboard.board[0][0]).toBe('.');
@@ -147,7 +147,6 @@ describe('gameboard', () => {
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     newGameboard.placeShip(newShip2, [1, 1], 'horizontal');
     newGameboard.pushShips();
-    console.log(newGameboard.ships);
     expect(newGameboard.areAllShipsSunk()).toBe(false);
   });
   it('returns true if all ships are sunk', () => {
@@ -158,9 +157,9 @@ describe('gameboard', () => {
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     newGameboard.placeShip(newShip2, [1, 1], 'horizontal');
     newGameboard.pushShips();
-    newGameboard.recieveAttack([5, 5]);
-    newGameboard.recieveAttack([1, 1]);
-    newGameboard.recieveAttack([1, 2]);
+    newGameboard.receiveAttack([5, 5]);
+    newGameboard.receiveAttack([1, 1]);
+    newGameboard.receiveAttack([1, 2]);
     expect(newGameboard.areAllShipsSunk()).toBe(true);
   });
 });

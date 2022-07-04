@@ -1,11 +1,11 @@
-const Gameboard = require('./gameboard');
+import Gameboard from './gameboard';
 
-class Player {
+export default class Player {
   constructor() {
-    this.board = new Gameboard();
+    this.Gameboard = new Gameboard();
   }
   attack(targetPlayer, coords) {
-    targetPlayer.board.receiveAttack(coords);
+    targetPlayer.Gameboard.receiveAttack(coords);
   }
   randomAttack(targetPlayer) {
     let row = Math.floor(Math.random() * 10);
@@ -13,4 +13,3 @@ class Player {
     this.attack(targetPlayer, [row, column]);
   }
 }
-module.exports = Player;

@@ -1,4 +1,4 @@
-let Ship = require('../ship');
+import Ship from '../ship';
 
 describe('Ship', () => {
   it('creates Ship', () => {

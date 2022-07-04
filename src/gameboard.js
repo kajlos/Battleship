@@ -1,4 +1,4 @@
-class Gameboard {
+export default class Gameboard {
   constructor() {
     this.board = [];
     this.ships = [];
@@ -181,7 +181,7 @@ class Gameboard {
     if (row < 0 || row > 9 || column < 0 || column > 9) return;
     this.board[row][column] = mark;
   }
-  recieveAttack(coords) {
+  receiveAttack(coords) {
     let [row, column] = coords;
     if (typeof this.board[row][column] == 'object') {
       this.board[row][column].hit(coords);
@@ -211,5 +211,3 @@ class Gameboard {
 // let newShip = new Ship(3);
 // newGameboard.placeShip(newShip, [5, 6], 'vertical');
 // console.log(newGameboard.board);
-
-module.exports = Gameboard;
