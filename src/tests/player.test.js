@@ -9,4 +9,5 @@ describe('Player', () => {
     console.log(player2);
     expect(player2.Gameboard.board[0][0]).toEqual('.');
   });
+  it();
 });
