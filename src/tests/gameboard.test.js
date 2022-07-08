@@ -3,7 +3,6 @@ import Ship from '../ship';
 describe('gameboard', () => {
   it('creates a gameboard', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     expect(newGameboard.board.length).toEqual(10);
     expect(newGameboard.board[0].length).toEqual(10);
     expect(newGameboard.board[0][0]).toBeDefined();
@@ -11,7 +10,6 @@ describe('gameboard', () => {
   });
   it('places a 1 length ship', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(1);
     newGameboard.placeShip(newShip, [0, 1], 'vertical');
     newGameboard.placeShip(newShip, [2, 3], 'vertical');
@@ -20,7 +18,6 @@ describe('gameboard', () => {
   });
   it('places a 2 or more length ship', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(2);
     let newShip2 = new Ship(3);
     newGameboard.placeShip(newShip, [0, 1], 'vertical');
@@ -33,7 +30,6 @@ describe('gameboard', () => {
   });
   it("doesn't create ship if ship would be outside gameboard", () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(2);
     let newShip2 = new Ship(2);
     newGameboard.placeShip(newShip, [9, 1], 'vertical');
@@ -43,7 +39,6 @@ describe('gameboard', () => {
   });
   it('marks spots when placed 1 length ship', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(1);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     expect(newGameboard.board[5][5]).toBe(newShip);
@@ -58,7 +53,6 @@ describe('gameboard', () => {
   });
   it('marks spots vertically when placed 2 length ship', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     expect(newGameboard.board[5][5]).toBe(newShip);
@@ -76,7 +70,6 @@ describe('gameboard', () => {
   });
   it('marks spot horizontally when placed 2 length ship', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'horizontal');
     expect(newGameboard.board[5][5]).toBe(newShip);
@@ -94,7 +87,6 @@ describe('gameboard', () => {
   });
   it('marks spot vertically when placed 3 length ship ', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(3);
     newGameboard.placeShip(newShip, [7, 0], 'vertical');
     expect(newGameboard.board[7][0]).toBe(newShip);
@@ -108,7 +100,6 @@ describe('gameboard', () => {
   });
   it('marks spot horizontally when placed 3 length ship', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(3);
     newGameboard.placeShip(newShip, [9, 7], 'horizontal');
     expect(newGameboard.board[9][7]).toBe(newShip);
@@ -122,7 +113,6 @@ describe('gameboard', () => {
   });
   it('recieves a attack', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     newGameboard.receiveAttack([5, 5]);
@@ -131,7 +121,6 @@ describe('gameboard', () => {
   });
   it('recieves a missed attack', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     newGameboard.receiveAttack([0, 0]);
@@ -141,22 +130,18 @@ describe('gameboard', () => {
   });
   it('returns false if not all ships are sunk', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(1);
     let newShip2 = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     newGameboard.placeShip(newShip2, [1, 1], 'horizontal');
-    newGameboard.pushShips();
     expect(newGameboard.areAllShipsSunk()).toBe(false);
   });
   it('returns true if all ships are sunk', () => {
     let newGameboard = new Gameboard();
-    newGameboard.init();
     let newShip = new Ship(1);
     let newShip2 = new Ship(2);
     newGameboard.placeShip(newShip, [5, 5], 'vertical');
     newGameboard.placeShip(newShip2, [1, 1], 'horizontal');
-    newGameboard.pushShips();
     newGameboard.receiveAttack([5, 5]);
     newGameboard.receiveAttack([1, 1]);
     newGameboard.receiveAttack([1, 2]);

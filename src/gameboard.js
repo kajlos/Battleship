@@ -2,8 +2,9 @@ export default class Gameboard {
   constructor() {
     this.board = [];
     this.ships = [];
+    this.#init();
   }
-  init() {
+  #init() {
     for (let i = 0; i < 10; i++) {
       this.board[i] = [];
       for (let j = 0; j < 10; j++) {
@@ -15,6 +16,7 @@ export default class Gameboard {
     if (!this.#isPlaceAvailable(ship.getLength(), coords, orientation)) return 'Place not avaiable';
     this.#createShip(ship, coords, orientation);
     this.#markSpotsAfertPlace(ship.getLength(), coords, orientation);
+    this.#pushShips();
   }
   #createShip(ship, coords, orientation) {
     if (orientation === 'vertical') {
@@ -191,7 +193,7 @@ export default class Gameboard {
     this.#markSpot(coords, '.');
     return false;
   }
-  pushShips() {
+  #pushShips() {
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
         if (typeof this.board[i][j] == 'object') {
