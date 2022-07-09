@@ -49,9 +49,7 @@ footer {
 .enemy-board .board .cell {
   cursor: pointer;
 }
-.enemy-board .board .cell.hit {
-  cursor: default;
-}
+.enemy-board .board .cell.hit,
 .enemy-board .board .cell.missed {
   cursor: default;
 }
