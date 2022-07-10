@@ -17,10 +17,8 @@ export default class Player {
   attack(targetPlayer, coords) {
     if (targetPlayer.Gameboard.receiveAttack(coords)) {
       this.guessBoard[coords[0]][coords[1]] = 'X';
-      console.log('X');
     } else {
       this.guessBoard[coords[0]][coords[1]] = '.';
-      console.log('.');
     }
   }
   randomAttack(targetPlayer) {
