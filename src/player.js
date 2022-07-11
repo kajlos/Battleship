@@ -3,22 +3,17 @@ import Gameboard from './gameboard';
 export default class Player {
   constructor() {
     this.Gameboard = new Gameboard();
-    this.guessBoard = [];
-    this.#guessBoardInit();
-  }
-  #guessBoardInit() {
-    for (let i = 0; i < 10; i++) {
-      this.guessBoard[i] = [];
-      for (let j = 0; j < 10; j++) {
-        this.guessBoard[i][j] = '';
-      }
-    }
+    this.GuessBoard = new Gameboard();
   }
   attack(targetPlayer, coords) {
-    if (targetPlayer.Gameboard.receiveAttack(coords)) {
-      this.guessBoard[coords[0]][coords[1]] = 'X';
+    let result = targetPlayer.Gameboard.receiveAttack(coords);
+    if (result == 'hit') {
+      this.GuessBoard.board[coords[0]][coords[1]] = 'X';
+    } else if (result == 'sunk') {
+      this.GuessBoard.board[coords[0]][coords[1]] = 'S';
+      this.GuessBoard.markSpotsFromCoords(coords);
     } else {
-      this.guessBoard[coords[0]][coords[1]] = '.';
+      this.GuessBoard.board[coords[0]][coords[1]] = '.';
     }
   }
   randomAttack(targetPlayer) {

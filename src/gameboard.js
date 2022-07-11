@@ -177,18 +177,52 @@ export default class Gameboard {
       this.#markSpot(e, '#');
     });
   }
+  #getSpotsAroundCoords(coords) {
+    let [row, column] = coords;
+    return [
+      [row - 1, column],
+      [row - 1, column - 1],
+      [row - 1, column + 1],
+      [row, column - 1],
+      [row, column + 1],
+      [row + 1, column],
+      [row + 1, column + 1],
+      [row + 1, column - 1],
+    ];
+  }
   #markSpot(coords, mark) {
     let row = parseFloat(coords[0]);
     let column = parseFloat(coords[1]);
     if (row < 0 || row > 9 || column < 0 || column > 9) return;
     this.board[row][column] = mark;
   }
+  markSpotsFromCoords(coords) {
+    let spots = this.#getSpotsAroundCoords(coords);
+    spots.forEach(spot => {
+      let [row, column] = spot;
+      if (row < 0 || row > 9 || column < 0 || column > 9) return;
+      if (this.board[row][column] == 'X') {
+        this.#markSpot(spot, 'S');
+        this.markSpotsFromCoords(spot);
+      } else if (this.board[spot[0]][spot[1]] == 'S') {
+        return;
+      } else {
+        this.#markSpot(spot, '.');
+      }
+    });
+  }
   receiveAttack(coords) {
     let [row, column] = coords;
     if (typeof this.board[row][column] == 'object') {
       this.board[row][column].hit(coords);
-      this.#markSpot(coords, 'X');
-      return true;
+
+      if (this.board[row][column].isSunk()) {
+        this.#markSpot(coords, 'S');
+        return 'sunk';
+      } else {
+        this.#markSpot(coords, 'X');
+        return 'hit';
+      }
     }
     this.#markSpot(coords, '.');
     return false;
@@ -208,8 +242,3 @@ export default class Gameboard {
     return this.ships.every(ship => ship.isSunk());
   }
 }
-// let newGameboard = new Gameboard();
-// newGameboard.init();
-// let newShip = new Ship(3);
-// newGameboard.placeShip(newShip, [5, 6], 'vertical');
-// console.log(newGameboard.board);

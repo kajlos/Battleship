@@ -9,8 +9,8 @@ describe('Player', () => {
     player1.attack(player2, [0, 0]);
     player1.attack(player2, [1, 1]);
     expect(player2.Gameboard.board[0][0]).toEqual('.');
-    expect(player1.guessBoard[0][0]).toEqual('.');
-    expect(player2.Gameboard.board[1][1]).toEqual('X');
-    expect(player1.guessBoard[1][1]).toEqual('X');
+    expect(player1.GuessBoard.board[0][0]).toEqual('.');
+    expect(player2.Gameboard.board[1][1]).toEqual('S');
+    expect(player1.GuessBoard.board[1][1]).toEqual('S');
   });
 });
