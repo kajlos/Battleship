@@ -14,6 +14,12 @@ function gameLoop() {
   player2.Gameboard.placeShip(new Ship(1), [0, 0], 'vertical');
   player2.Gameboard.placeShip(new Ship(3), [4, 4], 'vertical');
   DOM.drawYourboard(yourBoard, player1);
-  DOM.drawEnemyBoard(enemyBoard, player1, player2);
+  DOM.drawEnemyBoard(enemyBoard, player1, player2, yourBoard);
+  console.log(checkIfAllShipsAreSunk(player1));
 }
+function checkIfAllShipsAreSunk(player) {
+  return player.Gameboard.areAllShipsSunk();
+}
+
 gameLoop();
+export { gameLoop, checkIfAllShipsAreSunk };

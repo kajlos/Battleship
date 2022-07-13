@@ -218,6 +218,7 @@ export default class Gameboard {
 
       if (this.board[row][column].isSunk()) {
         this.#markSpot(coords, 'S');
+        this.markSpotsFromCoords(coords);
         return 'sunk';
       } else {
         this.#markSpot(coords, 'X');
@@ -240,5 +241,10 @@ export default class Gameboard {
   }
   areAllShipsSunk() {
     return this.ships.every(ship => ship.isSunk());
+  }
+  static getRandomCoords() {
+    let row = Math.floor(Math.random() * 10);
+    let column = Math.floor(Math.random() * 10);
+    return [row, column];
   }
 }

@@ -17,8 +17,11 @@ export default class Player {
     }
   }
   randomAttack(targetPlayer) {
-    let row = Math.floor(Math.random() * 10);
-    let column = Math.floor(Math.random() * 10);
-    this.attack(targetPlayer, [row, column]);
+    let [row, column] = Gameboard.getRandomCoords();
+    if (this.GuessBoard.board[row][column] === '') {
+      this.attack(targetPlayer, [row, column]);
+    } else {
+      this.randomAttack(targetPlayer);
+    }
   }
 }
