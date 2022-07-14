@@ -53,6 +53,47 @@ footer {
 .enemy-board .board .cell.missed {
   cursor: default;
 }
+.overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: white;
+  width: 500px;
+  max-width: 80%;
+  height: 300px;
+}
+
+.modal.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.won {
+  text-transform: uppercase;
+}
+.newGame {
+  padding: 1rem 2rem;
+}
 @media (max-width: 810px) {
   .boards {
     flex-direction: column;
