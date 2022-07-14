@@ -13,10 +13,24 @@ export default class Gameboard {
     }
   }
   placeShip(ship, coords, orientation) {
-    if (!this.#isPlaceAvailable(ship.getLength(), coords, orientation)) return 'Place not avaiable';
+    if (!this.#isPlaceAvailable(ship.getLength(), coords, orientation)) return false;
     this.#createShip(ship, coords, orientation);
     this.#markSpotsAfertPlace(ship.getLength(), coords, orientation);
     this.#pushShips();
+    return true;
+  }
+  placeShipsRandomly(shipsArray) {
+    console.log(shipsArray);
+    shipsArray.forEach(ship => {
+      let isPlaced = false;
+      while (isPlaced == false) {
+        let coords = Gameboard.getRandomCoords();
+        let orientation = Gameboard.getRandomOrientation();
+        if (this.placeShip(ship, coords, orientation)) {
+          isPlaced = true;
+        }
+      }
+    });
   }
   #createShip(ship, coords, orientation) {
     if (orientation === 'vertical') {
@@ -246,5 +260,10 @@ export default class Gameboard {
     let row = Math.floor(Math.random() * 10);
     let column = Math.floor(Math.random() * 10);
     return [row, column];
+  }
+  static getRandomOrientation() {
+    let orientations = ['vertical', 'horizontal'];
+    let random = Math.round(Math.random());
+    return orientations[random];
   }
 }
