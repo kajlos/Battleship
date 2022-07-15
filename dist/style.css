@@ -79,7 +79,8 @@ footer {
   background-color: white;
   width: 500px;
   max-width: 80%;
-  height: 300px;
+  min-height: 300px;
+  padding: 1rem;
 }
 
 .modal.active {

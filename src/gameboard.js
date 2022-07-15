@@ -20,7 +20,6 @@ export default class Gameboard {
     return true;
   }
   placeShipsRandomly(shipsArray) {
-    console.log(shipsArray);
     shipsArray.forEach(ship => {
       let isPlaced = false;
       while (isPlaced == false) {
@@ -127,15 +126,9 @@ export default class Gameboard {
           [row - 1, column + 1],
           [row, column - 1],
           [row, column + 1],
+          [row + 1, column],
           [row + 1, column + 1],
           [row + 1, column - 1],
-          [row + 2, column + 1],
-          [row + 2, column - 1],
-          [row + 3, column + 1],
-          [row + 3, column - 1],
-          [row + 4, column + 1],
-          [row + 4, column - 1],
-          [row + 4, column],
         ];
       } else if (length === 2) {
         return [
