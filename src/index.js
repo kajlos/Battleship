@@ -4,7 +4,6 @@ let yourBoard = document.querySelector('.your-board .board');
 let enemyBoard = document.querySelector('.enemy-board .board');
 let overlay = document.querySelector('.overlay');
 let modal = document.querySelector('.modal');
-let orientation = 'vertical';
 function gameLoop() {
   let player1 = new Player();
   let player2 = new Player();
@@ -21,6 +20,7 @@ function gameLoop() {
     new Ship(1),
     new Ship(1),
   ]);
+  drawYourboard(player1);
   drawEnemyBoard(player1, player2);
 }
 function checkIfAllShipsAreSunk(player) {
@@ -100,25 +100,44 @@ function switchModalAndOverlay() {
   overlay.classList.toggle('active');
   modal.classList.toggle('active');
 }
-function drawFirstBoard(player, placedShips = 0) {
+function resetBoard(player) {
+  player.Gameboard.board = [];
+  for (let i = 0; i < 10; i++) {
+    player.Gameboard.board[i] = [];
+    for (let j = 0; j < 10; j++) {
+      player.Gameboard.board[i][j] = '';
+    }
+  }
+  player.Gameboard.ships = [];
+}
+function drawFirstBoard(player, placedShips = 0, orienationtext = 'vertical') {
   modal.innerHTML = '';
   let thisBoard = document.createElement('div');
   thisBoard.classList.add('board');
   let rotationButton = document.createElement('button');
   rotationButton.textContent = 'Rotate';
+  let orienation = document.createElement('p');
+  let resetButton = document.createElement('button');
+  let buttonsDiv = document.createElement('div');
+  buttonsDiv.append(rotationButton, resetButton);
+  buttonsDiv.classList.add('buttonsDiv');
+  resetButton.addEventListener('click', () => {
+    resetBoard(player);
+    drawFirstBoard(player);
+  });
+  resetButton.textContent = 'Reset';
+  orienation.textContent = orienationtext;
+  let shipLength;
   rotationButton.addEventListener('click', () => {
-    if (orientation === 'vertical') {
-      orientation = 'horizontal';
-      return;
-    }
-    if (orientation === 'horizontal') {
-      orientation = 'vertical';
-      return;
+    if (orienation.textContent == 'vertical') {
+      orienation.textContent = 'horizontal';
+    } else {
+      orienation.textContent = 'vertical';
     }
   });
-  modal.append(rotationButton, orientation);
+  modal.append(buttonsDiv, orienation);
   let board = player.Gameboard.board;
-  if (placedShips < 3) {
+  if (placedShips < 10) {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
         let cell = document.createElement('div');
@@ -130,10 +149,18 @@ function drawFirstBoard(player, placedShips = 0) {
           cell.classList.add('missed');
         } else if (board[i][j] == '') {
           cell.addEventListener('click', () => {
-            if (player.Gameboard.placeShip(new Ship(2), [i, j], orientation)) {
+            if (placedShips === 0) {
+              shipLength = 4;
+            } else if (placedShips < 3) {
+              shipLength = 3;
+            } else if (placedShips < 6) {
+              shipLength = 2;
+            } else if (placedShips < 10) {
+              shipLength = 1;
+            }
+            if (player.Gameboard.placeShip(new Ship(shipLength), [i, j], orienation.textContent)) {
               placedShips += 1;
-              console.log(placedShips);
-              drawFirstBoard(player, placedShips);
+              drawFirstBoard(player, placedShips, orienation.textContent);
             }
           });
         }
