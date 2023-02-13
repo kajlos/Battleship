@@ -6,11 +6,16 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
   align-items: center;
   background-color: lightgray;
+}
+.container {
+  width: min(90%, 1200px);
+  margin-inline: auto;
+}
+h1 {
+  text-align: center;
 }
 .board {
   display: grid;
@@ -26,20 +31,13 @@ body {
 }
 .boards {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
+  justify-content: space-between;
+  padding-block: 3rem;
 }
 .ship {
   background-color: #333;
 }
-footer {
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-weight: bold;
-}
+
 .hit {
   background-color: red;
 }
